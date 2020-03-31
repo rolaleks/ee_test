@@ -11,7 +11,7 @@ public class Cart extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        this.renderPage(resp, req, "Your cart is empty!");
+        this.renderPage(resp, req, "cart.jsp");
     }
 
     @Override

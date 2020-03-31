@@ -12,7 +12,7 @@ public class Main extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        this.renderPage(resp, req, "Welcome to home page!");
+        this.renderPage(resp, req, "main.jsp");
     }
 
     @Override

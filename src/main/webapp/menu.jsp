@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <ul>
     <li><a href="main">Главная</a></li>
     <li><a href="catalog">Каталог</a></li>

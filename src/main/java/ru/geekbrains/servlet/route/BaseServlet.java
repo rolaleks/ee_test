@@ -16,29 +16,15 @@ public abstract class BaseServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(BaseServlet.class);
 
 
-    protected void renderPage(HttpServletResponse servletResponse, HttpServletRequest servletRequest, String content) throws IOException {
+    protected void renderPage(HttpServletResponse servletResponse, HttpServletRequest servletRequest, String file) throws IOException {
 
-        servletResponse.getWriter().print("<html>");
-        servletResponse.getWriter().print(this.getHead());
-        servletResponse.getWriter().print("<body>");
 
         try {
-            getServletContext().getRequestDispatcher("/menu.html").include(servletRequest, servletResponse);
+            getServletContext().setAttribute("file", file);
+            getServletContext().getRequestDispatcher("/layout.jsp").include(servletRequest, servletResponse);
         } catch (ServletException e) {
             e.printStackTrace();
         }
 
-        servletResponse.getWriter().print("<div class=\"content\">" + content + "</div>");
-        servletResponse.getWriter().print("</body>");
-        servletResponse.getWriter().print("</html>");
-    }
-
-    private String getHead() {
-        String head = "<head>" +
-                "<meta charset=\"utf-8\">" +
-                "<title>" + this.getTitle() + "</title>" +
-                "</head>";
-
-        return head;
     }
 }

@@ -12,7 +12,7 @@ public class Catalog extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        this.renderPage(resp, req, "Welcome to catalog!");
+        this.renderPage(resp, req, "catalog.jsp");
     }
 
     @Override

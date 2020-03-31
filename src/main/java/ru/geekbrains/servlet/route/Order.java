@@ -12,7 +12,7 @@ public class Order extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        this.renderPage(resp, req, "Before order, please add product to cart!");
+        this.renderPage(resp, req, "order.jsp");
     }
 
 
