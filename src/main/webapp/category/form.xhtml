@@ -1,0 +1,22 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<div class="row py-2">
+    <div class="col-12">
+        <h:form id="categoryForm">
+            <div class="form-group">
+                <h:outputLabel value="Name" for="name"/>
+                <h:inputText styleClass="form-control" id="name" name="name" placeholder="Enter name"
+                             value="#{categoryController.category.name}" required="true"
+                             requiredMessage="Name is required"/>
+            </div>
+            <h:commandButton value="Submit" styleClass="btn btn-primary"
+                             action="#{categoryController.saveCategory()}"/>
+        </h:form>
+    </div>
+</div>
+
+</html>

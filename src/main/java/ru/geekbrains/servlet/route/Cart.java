@@ -1,21 +1,33 @@
 package ru.geekbrains.servlet.route;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import ru.geekbrains.servlet.route.record.Product;
 
-@WebServlet(name = "Cart", urlPatterns = "/cart")
-public class Cart extends BaseServlet {
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+@SessionScoped
+@Named
+public class Cart implements Serializable {
 
-        this.renderPage(resp, req, "cart.jsp");
+
+    private ArrayList<Product> products;
+
+    public Cart() {
+
+        this.products = new ArrayList<>();
     }
 
-    @Override
-    public String getTitle() {
-        return "Корзина";
+    public void addProduct(Product product) {
+        this.products.add(product);
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public void delete(Product product) {
+        products.remove(product);
     }
 }

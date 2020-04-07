@@ -5,19 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "Order", urlPatterns = "/order")
-public class Order extends BaseServlet {
+public class Order  {
 
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-        this.renderPage(resp, req, "order.jsp");
-    }
-
-
-    @Override
-    public String getTitle() {
-        return "Заказ";
-    }
 }

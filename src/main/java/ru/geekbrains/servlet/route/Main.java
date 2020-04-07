@@ -5,18 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "Main", urlPatterns = "/main")
-public class Main extends BaseServlet {
+
+public class Main {
 
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-        this.renderPage(resp, req, "main.jsp");
-    }
-
-    @Override
-    public String getTitle() {
-        return "Главная";
-    }
 }
