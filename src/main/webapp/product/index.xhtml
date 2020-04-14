@@ -14,7 +14,23 @@
                     <h:commandButton value="Add product" styleClass="btn btn-primary"
                                      action="#{productController.createProduct}"/>
                 </div>
-                <div class="col-12">
+                <div class="col-4">
+                    <ul>
+                        <li>
+                            <h:commandLink value="All" action="#{productController.search(null)}">
+                                <f:ajax event="action" render="productForm"/>
+                            </h:commandLink>
+                        </li>
+                        <ui:repeat var="category" value="#{categoryController.allCategories}">
+                            <li>
+                                <h:commandLink value="#{category.name}" action="#{productController.search(category)}">
+                                    <f:ajax event="action" render="productForm"/>
+                                </h:commandLink>
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </div>
+                <div class="col-8">
                     <h:dataTable value="#{productController.allProduct}" var="product"
                                  styleClass="table table-bordered my-2">
                         <h:column>
