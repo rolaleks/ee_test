@@ -1,99 +1,44 @@
 package ru.geekbrains.servlet.route.record;
 
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import ru.geekbrains.servlet.route.service.CategoryRepr;
+import ru.geekbrains.servlet.route.service.ProductRepr;
 
-public class Product extends Record {
+import javax.persistence.*;
 
+@Table(name = "products")
+@Entity
+public class Product {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column
     private String name;
+
+    @Column
     private String description;
+
+    @Column
     private double price;
 
-    public static String getTableName() {
-        return "products";
+    @ManyToOne
+    private Category category;
+
+    public Product() {
+
     }
 
-
-    protected boolean insert() {
-
-        int id = getDbConnection().executeInsert("INSERT INTO " + getTableName() + " (name,description,price)" +
-                "VALUES(?,?,?)", this.name, this.description, this.price);
-
-        boolean success = id != 0;
-        if (success) {
-            this.isNewRecord = false;
-            this.id = id;
+    public Product(ProductRepr product) {
+        this.id = product.getId();
+        this.name = product.getName();
+        this.description = product.getDescription();
+        this.price = product.getPrice();
+        CategoryRepr categoryRepr = product.getCategory();
+        if (categoryRepr != null) {
+            this.category = new Category(categoryRepr);
         }
-        return success;
-    }
-
-    protected boolean update() {
-
-        int result = getDbConnection().executeUpdate("UPDATE " + getTableName() + " SET name = ?, description = ?, price = ? " +
-                "WHERE id = ?", this.name, this.description, this.price, this.id);
-
-        return result == 1;
-    }
-
-    public boolean delete() {
-
-        int result = getDbConnection().executeUpdate("DELETE FROM " + getTableName() + " WHERE id = ?", this.id);
-        return result == 1;
-    }
-
-    public static Product findOne(Integer id) {
-
-        ResultSet resultSet = getDbConnection().executeQuery("SELECT * FROM " + getTableName() + " WHERE id = ? LIMIT 1", id);
-        try {
-            if (resultSet.next()) {
-                Product product = new Product();
-                product.prepareModel(resultSet);
-
-
-                return product;
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-
-        }
-
-        return null;
-    }
-
-    public static ArrayList<Product> findAll() {
-
-
-        ResultSet resultSet = getDbConnection()
-                .executeQuery("SELECT * FROM " + getTableName());
-
-        ArrayList<Product> products = new ArrayList<>();
-        try {
-
-            while (resultSet.next()) {
-                Product product = new Product();
-                product.prepareModel(resultSet);
-
-
-                products.add(product);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-
-        }
-
-        return products;
-    }
-
-
-    public void prepareModel(ResultSet resultSet) throws SQLException {
-        this.id = resultSet.getInt("id");
-        this.name = resultSet.getString("name");
-        this.description = resultSet.getString("description");
-        this.price = resultSet.getFloat("price");
-        this.isNewRecord = false;
     }
 
     public String getName() {
@@ -125,4 +70,11 @@ public class Product extends Record {
     }
 
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

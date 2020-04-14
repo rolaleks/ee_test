@@ -27,6 +27,12 @@
                     <f:converter converterId="javax.faces.BigDecimal"/>
                 </h:inputText>
             </div>
+            <div class="form-group">
+                <h:outputLabel value="Category" for="categoryId"/>
+                <h:selectOneMenu id="categoryId" value="#{productController.product.categoryId}">
+                    <f:selectItems value="#{categoryController.allCategories}" var="category" itemLabel="#{category.name}"  itemValue="#{category.id}"/>
+                </h:selectOneMenu>
+            </div>
             <h:commandButton value="Submit" styleClass="btn btn-primary"
                              action="#{productController.saveProduct()}"/>
         </h:form>
