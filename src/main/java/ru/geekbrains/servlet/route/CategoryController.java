@@ -1,23 +1,20 @@
 package ru.geekbrains.servlet.route;
 
-import ru.geekbrains.servlet.route.record.Category;
 import ru.geekbrains.servlet.route.service.CategoryRepr;
-import ru.geekbrains.servlet.route.service.CategoryService;
+import ru.geekbrains.servlet.route.service.ICatalogService;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @SessionScoped
 @Named
 public class CategoryController implements Serializable {
 
-    @Inject
-    private CategoryService categoryService;
+    @EJB
+    private ICatalogService categoryService;
 
     private CategoryRepr category;
 

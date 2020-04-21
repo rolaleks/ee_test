@@ -2,44 +2,43 @@ package ru.geekbrains.servlet.route.service;
 
 import ru.geekbrains.servlet.route.record.Category;
 import ru.geekbrains.servlet.route.repository.CategoryRepository;
+import ru.geekbrains.servlet.route.repository.ICatalogRepository;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.transaction.Transactional;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ApplicationScoped
-@Named
-public class CategoryService {
+@Stateless
+public class CategoryService implements ICatalogService {
 
-    @Inject
-    private CategoryRepository categoryRepository;
+    @EJB
+    private ICatalogRepository categoryRepository;
 
-    @Transactional
+    @TransactionAttribute
     public List<CategoryRepr> findAll() {
 
         return categoryRepository.findAll().stream().map(CategoryRepr::new).collect(Collectors.toList());
     }
 
-    @Transactional
+    @TransactionAttribute
     public CategoryRepr find(Integer id) {
 
         return new CategoryRepr(categoryRepository.find(id));
     }
 
-    @Transactional
+    @TransactionAttribute
     public void delete(CategoryRepr category) {
         categoryRepository.delete(category.getId());
     }
 
-    @Transactional
+    @TransactionAttribute
     public void insert(CategoryRepr category) {
         categoryRepository.insert(new Category(category));
     }
 
-    @Transactional
+    @TransactionAttribute
     public void update(CategoryRepr category) {
         categoryRepository.update(new Category(category));
     }

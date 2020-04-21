@@ -1,15 +1,12 @@
 package ru.geekbrains.servlet.route.repository;
 
 import ru.geekbrains.servlet.route.record.Category;
-import ru.geekbrains.servlet.route.record.Product;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import javax.ejb.Stateless;
 import java.util.List;
 
-@ApplicationScoped
-@Named
-public class CategoryRepository extends BaseRepository {
+@Stateless
+public class CategoryRepository extends BaseRepository implements ICatalogRepository {
 
     @Override
     public Category find(Integer id) {

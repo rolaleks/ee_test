@@ -1,6 +1,7 @@
 package ru.geekbrains.servlet.route.repository;
 
 
+import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -10,17 +11,17 @@ public abstract class BaseRepository {
     @PersistenceContext(unitName = "ds")
     protected EntityManager entityManager;
 
-    @Transactional
+    @TransactionAttribute
     public void insert(Object o) {
         entityManager.persist(o);
     }
 
-    @Transactional
+    @TransactionAttribute
     public void update(Object o) {
         entityManager.merge(o);
     }
 
-    @Transactional
+    @TransactionAttribute
     public void delete(Integer id) {
         Object o = this.find(id);
         if (o != null) {
@@ -28,7 +29,7 @@ public abstract class BaseRepository {
         }
     }
 
-    @Transactional
+    @TransactionAttribute
     public void delete(Object o) {
         entityManager.remove(o);
     }

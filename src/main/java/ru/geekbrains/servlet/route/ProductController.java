@@ -1,15 +1,12 @@
 package ru.geekbrains.servlet.route;
 
 import ru.geekbrains.servlet.route.record.Product;
-import ru.geekbrains.servlet.route.repository.ProductRepository;
 import ru.geekbrains.servlet.route.service.CategoryRepr;
-import ru.geekbrains.servlet.route.service.CategoryService;
+import ru.geekbrains.servlet.route.service.IProductService;
 import ru.geekbrains.servlet.route.service.ProductRepr;
-import ru.geekbrains.servlet.route.service.ProductService;
 
-
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -18,10 +15,10 @@ import java.util.List;
 @Named
 public class ProductController implements Serializable {
 
-    @Inject
-    private ProductService productService;
+    @EJB
+    private IProductService productService;
 
-    @Inject
+    @EJB
     private Cart cart;
 
     private ProductRepr product;
@@ -61,7 +58,7 @@ public class ProductController implements Serializable {
         return "/product/update.xhtml?faces-redirect=true";
     }
 
-    public void addToCart(Product product) {
+    public void addToCart(ProductRepr product) {
 
         this.cart.addProduct(product);
     }

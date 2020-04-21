@@ -1,9 +1,10 @@
 package ru.geekbrains.servlet.route;
 
 import ru.geekbrains.servlet.route.record.Product;
+import ru.geekbrains.servlet.route.service.ProductRepr;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,14 +14,14 @@ import java.util.ArrayList;
 public class CartController implements Serializable {
 
 
-    @Inject
+    @EJB
     private Cart cart;
 
-    public ArrayList<Product> getAllProduct() {
+    public ArrayList<ProductRepr> getAllProduct() {
         return cart.getProducts();
     }
 
-    public void deleteProduct(Product product) {
+    public void deleteProduct(ProductRepr product) {
         cart.delete(product);
     }
 
