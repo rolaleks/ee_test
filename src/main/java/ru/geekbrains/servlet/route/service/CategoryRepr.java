@@ -1,5 +1,6 @@
 package ru.geekbrains.servlet.route.service;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.geekbrains.servlet.route.record.Category;
 import ru.geekbrains.servlet.route.record.Product;
 
@@ -12,6 +13,7 @@ public class CategoryRepr {
 
     private String name;
 
+    @JsonIgnore
     private List<ProductRepr> products;
 
     public CategoryRepr() {

@@ -17,4 +17,16 @@ public class ProductRepository extends BaseRepository implements IProductReposit
     public List<Product> findAll() {
         return entityManager.createQuery("from Product", Product.class).getResultList();
     }
+
+    @Override
+    public List<Product> findByCategory(Integer id) {
+        return entityManager.createQuery("from Product where category_id = :category_id", Product.class)
+                .setParameter("category_id", id)
+                .getResultList();
+    }
+
+    public Product find(String name) {
+        return entityManager.createQuery("from Product where name = :name", Product.class)
+                .setParameter("name", name).getSingleResult();
+    }
 }

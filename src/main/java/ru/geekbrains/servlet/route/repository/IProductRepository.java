@@ -11,7 +11,11 @@ public interface IProductRepository {
 
     Object find(Integer id);
 
+    Object find(String name);
+
     List<Product> findAll();
+
+    List<Product> findByCategory(Integer id);
 
     void insert(Object o);
 

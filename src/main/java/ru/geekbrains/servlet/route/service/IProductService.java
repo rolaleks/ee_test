@@ -18,4 +18,7 @@ public interface IProductService {
 
     @TransactionAttribute
     public void update(ProductRepr product) ;
+
+    @TransactionAttribute
+    public ProductRepr find(Integer id);
 }

@@ -4,7 +4,7 @@ import ru.geekbrains.servlet.route.record.Category;
 import ru.geekbrains.servlet.route.record.Product;
 
 import javax.enterprise.inject.spi.CDI;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ProductRepr {
 
@@ -16,6 +16,7 @@ public class ProductRepr {
 
     private double price;
 
+    @JsonIgnore
     private CategoryRepr category;
 
     public ProductRepr() {

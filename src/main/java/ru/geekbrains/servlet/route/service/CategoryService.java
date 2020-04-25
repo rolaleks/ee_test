@@ -1,17 +1,19 @@
 package ru.geekbrains.servlet.route.service;
 
 import ru.geekbrains.servlet.route.record.Category;
-import ru.geekbrains.servlet.route.repository.CategoryRepository;
 import ru.geekbrains.servlet.route.repository.ICatalogRepository;
+import ru.geekbrains.servlet.route.rest.CategoryServiceRs;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import javax.jws.WebService;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Stateless
-public class CategoryService implements ICatalogService {
+@WebService(endpointInterface = "ru.geekbrains.servlet.route.service.CategoryServiceWs", serviceName = "categoryService")
+public class CategoryService implements ICatalogService, CategoryServiceWs, CategoryServiceRs {
 
     @EJB
     private ICatalogRepository categoryRepository;
