@@ -41,7 +41,6 @@ public class ProductController implements Serializable {
 
     public void search(CategoryRepr category) {
         this.category = category;
-        System.out.println("!!!!!!!!!!!!!!!!!!");
     }
 
 
